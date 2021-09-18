@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Conversor de texto</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <label for="text">Digite o Texto que deseja Converter/Formatar</label>
+        <textarea
+          rows="10"
+          placeholder="Digite o Texto que deseja Converter/Formatar"
+          id="text"
+          v-model="text"
+        ></textarea>
+        <div class="btn-group">
+          <button class="count">{{ count }} caracters</button>
+          <button class="count">{{ words }} palavras</button>
+          <button @click="upperCase">Tudo Maiusculo</button>
+          <button @click="lowerCase">Tudo Minusculo</button>
+          <button @click="capitalizeFirstLetterOfPhrase">
+            Primeira letra Maiuscola da frase
+          </button>
+          <button @click="capitalizeFirstLetterOfEachWord">
+            Primeira letra de cada Palava Maiuscola
+          </button>
+          <button @click="interleaveUpperAndLowerCaseOfPhrase">
+            Intercala Maiuscula e Minuscula
+          </button>
+          <button @click="removeSpaceOfPhrase">remover espaço</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          text: "",
+          count: 0,
+          words: 0,
+        },
+        watch: {
+          text(value) {
+            this.count = value.length;
+            if (value.length) this.words = value.split(" ").length;
+            else this.words = 0;
+          },
+        },
+        methods: {
+          upperCase() {
+            this.text = this.text.toUpperCase();
+          },
+          lowerCase() {
+            this.text = this.text.toLowerCase();
+          },
+          capitalizeFirstLetter(text) {
+            return text.charAt(0).toUpperCase() + text.slice(1);
+          },
+          capitalizeFirstLetterOfPhrase() {
+            this.text = this.capitalizeFirstLetter(this.text.toLowerCase());
+          },
+          capitalizeFirstLetterOfEachWord() {
+            let newText = [];
+            this.text
+              .split(" ")
+              .forEach((word) =>
+                newText.push(this.capitalizeFirstLetter(word.toLowerCase()))
+              );
+            this.text = newText.join(" ");
+          },
+          interleaveUpperAndLowerCaseOfPhrase() {
+            let newText = [];
+            this.text.split(" ").forEach((word) => {
+              newText.push(this.interleaveUpperAndLowerCase(word));
+            });
+            this.text = newText.join(" ");
+          },
+          interleaveUpperAndLowerCase(word) {
+            let interleave = true;
+            let newWord = "";
+            for (i = 0; i < word.length; i++) {
+              if (interleave) newWord += word[i].toUpperCase();
+              else newWord += word[i].toLowerCase();
+              interleave = !interleave;
+            }
+            return newWord;
+          },
+          removeSpaceOfPhrase() {
+            this.text = this.text.replace(/\s/g, "");
+          },
+        },
+      });
+    </script>
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #121214;
+        color: #dadada;
+      }
+      .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 15px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      label {
+        margin-bottom: 15px;
+        display: block;
+        text-transform: uppercase;
+      }
+      textarea {
+        border: 1px solid #dadada;
+        background-color: #121214;
+        color: #dadada;
+        width: 100%;
+        padding: 15px;
+        font-family: "Roboto", sans-serif;
+      }
+      .btn-group {
+        margin-top: 15px;
+      }
+      button {
+        padding: 10px;
+        text-transform: capitalize;
+        border-radius: 0;
+        border: 0;
+        background-color: #dadada;
+        color: #121214;
+        margin-bottom: 5px;
+      }
+      .count {
+        background-color: #0951af;
+        color: #dadada;
+      }
+    </style>
+  </body>
+</html>
