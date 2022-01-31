@@ -1,6 +1,6 @@
 # Transform App
 
-Transform app é um projeto desenvolvido com HTML, CSS e JS, com o objetivo de manipular/transformar strings/textos.
+Transform app é um projeto desenvolvido com HTML, CSS e JS (vue), com o objetivo de manipular/transformar strings/textos.
 
 Você pode acessar a aplicação através do link [Transform](https://jessicamedeirosp.github.io/transform-app/).
 
