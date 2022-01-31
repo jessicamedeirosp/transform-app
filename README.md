@@ -14,5 +14,11 @@ A aplicação conta possui:
 - Intercalar letras em maiúsculo e minúsculo
 - Remover espaços de frases
 
+Versão 1.0 do Transform app
 ![imagem da aplicação](transform-app.png)
 
+Versão 2.0 do Transform app
+![imagem da aplicação](transform-app2.0.png)
+
+Versão 2.0 do Transform app (mobile)
+![imagem da aplicação](transform-app2.0mobile.png)
